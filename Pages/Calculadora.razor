@@ -1,0 +1,49 @@
+﻿@page "/Calculadora"
+@using Models
+
+<h3>Calculator</h3>
+
+<EditForm Model="operaciones">
+    <DataAnnotationsValidator />
+    <label for="Id">Primer Numero:</label>
+    <div class="input-group">
+        <InputNumber @bind-Value=@operaciones.primerNumero class="form-control"></InputNumber>
+    </div>
+
+    <label for="Id">Segundo Numero:</label>
+    <div class="input-group">
+        <InputNumber @bind-Value=@operaciones.segundoNumero class="form-control"></InputNumber>
+    </div>
+
+    <br />
+
+    <button class="btn btn-outline-primary" @onclick="Sumar">Sumar</button>
+    <button class="btn btn-outline-danger" @onclick="Restar">Restar</button>
+    <button class="btn btn-outline-secondary" @onclick="Multiplicar">Multiplicar</button>
+
+    <br />
+    <h2 class="font-weight-bolder">@texto @operaciones.resultado</h2>
+</EditForm>
+
+@code {
+    Operaciones operaciones = new Operaciones();
+    String texto = "";
+
+    private void Sumar()
+    {
+        texto = "El resultado de la suma es: ";
+        operaciones.resultado = operaciones.primerNumero + operaciones.segundoNumero;
+    }
+
+    private void Restar()
+    {
+        texto = "El resultado de la resta es: ";
+        operaciones.resultado = operaciones.primerNumero - operaciones.segundoNumero;
+    }
+
+    private void Multiplicar()
+    {
+        texto = "El resultado de la multiplicacion es: ";
+        operaciones.resultado = operaciones.primerNumero * operaciones.segundoNumero;
+    }
+}
